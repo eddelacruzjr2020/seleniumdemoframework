@@ -1,11 +1,17 @@
 package base;
 
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Random;
+import org.openqa.selenium.WebElement;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -15,18 +21,15 @@ import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -265,5 +268,34 @@ import utils.ElementFetch;
     	
     	ele.getXPATHWebElement(webElement).sendKeys(Keys.CONTROL, "a");
     	ele.getXPATHWebElement(webElement).sendKeys(Keys.chord(Keys.DELETE));
+    }
+    
+    public int generate4Digit() {
+    	Random rand = new Random();
+        // Generate a random number between 1000 and 9999
+        int intRandom = rand.nextInt(9000) + 1000;
+    	return intRandom;
+    }
+    
+    public void assertElementIsDisplayed(String webElement) {
+        try {
+            // Locate the element
+            WebElement element = driver.findElement(By.xpath(webElement));
+
+            // Scroll to the element using JavaScript
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'nearest'});", element);
+
+            // Use explicit wait to ensure the element is visible after scrolling
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.visibilityOf(element));
+
+            // Assert that the element is displayed
+            assertTrue(element.isDisplayed(), "The element is not displayed.");
+        } catch (NoSuchElementException e) {
+            throw new AssertionError("Element not found: " + webElement, e);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            throw new AssertionError("Element was not visible within the timeout: " + webElement, e);
+        }
     }
 }

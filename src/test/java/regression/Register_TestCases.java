@@ -14,12 +14,14 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pageEvents.loginPageEvents;
 import pageEvents.registerPageEvents;
 
 public class Register_TestCases extends BaseTest{
 	String browser;
 	Dictionary<String, String> registerDetails;
 	registerPageEvents registerPage = new registerPageEvents();
+	loginPageEvents loginPage = new loginPageEvents();
 	
 	
 	@BeforeTest(alwaysRun = true)
@@ -39,9 +41,24 @@ public class Register_TestCases extends BaseTest{
 	  registerDetails = new Hashtable<>();
 	  registerDetails.put("firstName", "Ed");
 	  registerDetails.put("lastName", "Dela Cruz");
+	  registerDetails.put("phone", "09121234567");
+	  registerDetails.put("email", "test@test.com");
+	  registerDetails.put("address", "123 Test Way");
+	  registerDetails.put("city", "Makati");
+	  registerDetails.put("state", "Metro Manila");
+	  registerDetails.put("postalCode", "1600");
+	  registerDetails.put("userName", "AutoTest"+generate4Digit());
+	  registerDetails.put("password", "Password"+generate4Digit());
 	  
 	  registerPage.register(registerDetails);
-	  	  
+	  registerPage.validateUserRegister(registerDetails);
+	  
+  }
+  
+  @Test
+  public void tc02_Login() {
+	  loginPage.login(registerDetails);
+	  loginPage.validateSuccessfullyLogin();
 	  
   }
 
