@@ -10,4 +10,7 @@ public interface loginPageElements{
 
 	//Register tab
 	String tabRegister = "//a[normalize-space()='REGISTER']";
+	
+	//Reservation/Flights tab
+	String tabFlights = "//a[normalize-space()='Flights']";
 }
