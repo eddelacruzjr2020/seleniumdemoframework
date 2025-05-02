@@ -1,6 +1,6 @@
 package pageObjects;
 
-public interface registerPageElements {
+public interface flightPageElements {
 	
 	String txtFirstName = "//input[@name='firstName']";
 	String txtLastName = "//input[@name='lastName']";

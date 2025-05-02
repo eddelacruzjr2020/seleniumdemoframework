@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import base.BaseTest;
-import pageObjects.registerPageElements;
+import pageObjects.flightPageElements;
 
 public class registerPageEvents extends BaseTest{
 	
@@ -19,35 +19,39 @@ public class registerPageEvents extends BaseTest{
 		loginPage.registerButton();
 		
 		//Contact Information
-		clear(registerPageElements.txtFirstName);
-		sendKeys(registerPageElements.txtFirstName, registerDetails.get("firstName").toString());
-		clear(registerPageElements.txtLastName);
-		sendKeys(registerPageElements.txtLastName, registerDetails.get("lastName").toString());
-		clear(registerPageElements.txtPhone);
-		sendKeys(registerPageElements.txtPhone, registerDetails.get("phone").toString());
-		clear(registerPageElements.txtEMail);
-		sendKeys(registerPageElements.txtEMail, registerDetails.get("email").toString());
+		logger.info("Fill up Contact Information");
+		clear(flightPageElements.txtFirstName);
+		sendKeys(flightPageElements.txtFirstName, registerDetails.get("firstName").toString());
+		clear(flightPageElements.txtLastName);
+		sendKeys(flightPageElements.txtLastName, registerDetails.get("lastName").toString());
+		clear(flightPageElements.txtPhone);
+		sendKeys(flightPageElements.txtPhone, registerDetails.get("phone").toString());
+		clear(flightPageElements.txtEMail);
+		sendKeys(flightPageElements.txtEMail, registerDetails.get("email").toString());
 		
+		logger.info("Fill up Mailing Information");
 		//Mailing Information
-		clear(registerPageElements.txtAddress);
-		sendKeys(registerPageElements.txtAddress, registerDetails.get("address").toString());
-		clear(registerPageElements.txtCity);
-		sendKeys(registerPageElements.txtCity, registerDetails.get("city").toString());
-		clear(registerPageElements.txtStateProvinces);
-		sendKeys(registerPageElements.txtStateProvinces, registerDetails.get("state").toString());
-		clear(registerPageElements.txtPostalCode);
-		sendKeys(registerPageElements.txtPostalCode, registerDetails.get("postalCode").toString());
+		clear(flightPageElements.txtAddress);
+		sendKeys(flightPageElements.txtAddress, registerDetails.get("address").toString());
+		clear(flightPageElements.txtCity);
+		sendKeys(flightPageElements.txtCity, registerDetails.get("city").toString());
+		clear(flightPageElements.txtStateProvinces);
+		sendKeys(flightPageElements.txtStateProvinces, registerDetails.get("state").toString());
+		clear(flightPageElements.txtPostalCode);
+		sendKeys(flightPageElements.txtPostalCode, registerDetails.get("postalCode").toString());
 		
 		//User Information
-		clear(registerPageElements.txtUsername);
-		sendKeys(registerPageElements.txtUsername, registerDetails.get("userName").toString());
-		clear(registerPageElements.txtPassword);
-		sendKeys(registerPageElements.txtPassword, registerDetails.get("password").toString());
-		clear(registerPageElements.txtConfirmPassword);
-		sendKeys(registerPageElements.txtConfirmPassword, registerDetails.get("password").toString());
+		logger.info("Fill up User Information");
+		clear(flightPageElements.txtUsername);
+		sendKeys(flightPageElements.txtUsername, registerDetails.get("userName").toString());
+		clear(flightPageElements.txtPassword);
+		sendKeys(flightPageElements.txtPassword, registerDetails.get("password").toString());
+		clear(flightPageElements.txtConfirmPassword);
+		sendKeys(flightPageElements.txtConfirmPassword, registerDetails.get("password").toString());
 		
 		//Click Submit
-		click(registerPageElements.btnSubmit);
+		logger.info("Click Submit button");
+		click(flightPageElements.btnSubmit);
 		
 	}
 	

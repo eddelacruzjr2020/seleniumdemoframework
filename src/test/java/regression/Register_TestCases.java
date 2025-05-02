@@ -14,6 +14,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import base.BaseTest;
+import pageEvents.flightPageEvents;
 import pageEvents.loginPageEvents;
 import pageEvents.registerPageEvents;
 
@@ -22,11 +23,12 @@ public class Register_TestCases extends BaseTest{
 	Dictionary<String, String> registerDetails;
 	registerPageEvents registerPage = new registerPageEvents();
 	loginPageEvents loginPage = new loginPageEvents();
+	flightPageEvents flightsPage = new flightPageEvents();
 	
 	
 	@BeforeTest(alwaysRun = true)
 	@Parameters({"browser"})
-	public void prepareReport(@Optional("chrome") String browser) {
+	public void prepareReport(@Optional("chrome-headless") String browser) {
 		this.browser = browser;
 		beforeTestMethod(browser);
 	}
@@ -59,6 +61,12 @@ public class Register_TestCases extends BaseTest{
   public void tc02_Login() {
 	  loginPage.login(registerDetails);
 	  loginPage.validateSuccessfullyLogin();
+	  
+  }
+  
+  @Test
+  public void tc03_Reservation() {
+	  flightsPage.reserveFlight();
 	  
   }
 

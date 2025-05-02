@@ -26,6 +26,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterTest;
@@ -52,6 +53,7 @@ import utils.ElementFetch;
 		
 	public void beforeTestMethod(String browser) {
 		String reportname = "REGRESSION_" + browser.toUpperCase();
+		reportname = reportname.replace("-HEADLESS", "");
 		String reportPath = System.getProperty("user.dir") + File.separator + "Reports" + File.separator + reportname + File.separator + reportname + "_TESTING.html";
 	    sparkReporter = new ExtentSparkReporter(reportPath);
 	    extent = new ExtentReports();
@@ -297,5 +299,11 @@ import utils.ElementFetch;
         } catch (org.openqa.selenium.TimeoutException e) {
             throw new AssertionError("Element was not visible within the timeout: " + webElement, e);
         }
+    }
+    
+    public void selectElementByVisibleText(String webElement, String visibleText) {
+        WebElement element = ele.getXPATHWebElement(webElement);
+        Select select = new Select(element);
+        select.selectByVisibleText(visibleText);
     }
 }
